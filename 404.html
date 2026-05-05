@@ -1,12 +1,24 @@
 <!doctype html>
 <html>
   <head>
+    <meta charset="utf-8" />
     <script>
-      sessionStorage.setItem("redirectPath", location.pathname);
-      window.location.href = "/";
+      (function () {
+        var fullPath =
+          window.location.pathname +
+          window.location.search +
+          window.location.hash;
+
+        // evita salvar raiz
+        if (fullPath !== "/") {
+          sessionStorage.setItem("redirectPath", fullPath);
+        }
+
+        // suporte a base path (caso use repo no GitHub)
+        var base = "/";
+        window.location.replace(base);
+      })();
     </script>
   </head>
-  <body>
-    <p>Redirecionando...</p>
-  </body>
+  <body></body>
 </html>
